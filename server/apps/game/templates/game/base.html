@@ -12,9 +12,9 @@
             {% if user.is_authenticated %}
                 <li><a href="">게임하기</a></li>
                 <li><a href="{% url 'game:ranking_list' %}">랭킹보기</a></li>
-                <li><a href="{% url 'game:logout' %}">Logout</a></li>
+                <li><a href="{% url 'game:logout' %}">로그아웃</a></li>
             {% else %}
-                <li><a href="{% url 'game:login' %}">Login</a></li>
+                <li><a href="{% url 'game:login' %}">로그인</a></li>
                 <li><a href="{% url 'game:signup' %}">Signup</a></li>
             {% endif %}
         </div>
