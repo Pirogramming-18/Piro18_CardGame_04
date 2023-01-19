@@ -13,4 +13,5 @@ urlpatterns = [
     path("ranking_list/", views.ranking_list, name="ranking_list"),
     path("game/create", views.game_create, name="create"),
     path("game/<int:pk>/delete", views.game_delete, name="delete"),
+    path("<int:pk>/defend", views.defend, name="defend"),
 ]
