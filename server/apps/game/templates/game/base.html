@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIROGRAM CARDGAME</title>
+</head>
+<body>
+    <header>
+        <div class="nav">
+            {% if user.is_authenticated %}
+                <li><a href="">게임하기</a></li>
+                <li><a href="{% url 'game:ranking_list' %}">랭킹보기</a></li>
+                <li><a href="{% url 'game:logout' %}">Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'game:login' %}">Login</a></li>
+                <li><a href="{% url 'game:signup' %}">Signup</a></li>
+            {% endif %}
+        </div>
+    </header>
+    <div>
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

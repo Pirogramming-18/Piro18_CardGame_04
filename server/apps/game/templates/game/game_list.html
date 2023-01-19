@@ -1,0 +1,38 @@
+{% extends 'game/base.html' %}
+
+{% block content %}
+    <div>현재 플레이어: {{ user.username }}</div>
+    <br>
+    {% for play, attack_name, defend_name in play_list_name %}
+        <article>
+            <div>
+                <div>
+                    <span>{{ play.id }}</span> - {{ play.attack_id }} <span>VS</span> {{ play.defend_id }}
+                </div>
+                {% if user.username == defend_name and not play.accept %}
+                    <div><a href="">반격하기</a></div>
+                {% elif user.username == attack_name and not play.accept %}
+                    <div>진행중...</div>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <input type="submit" , value="게임 취소" />
+                    </form>
+                {% else %}
+                    <!-- 승패 -->
+                    <div>
+                        결과: 
+                        {% if play.winner == user.id %}
+                            승리
+                        {% else %}
+                            패배
+                        {% endif %}
+                    </div>
+                {% endif %}
+                <div>
+                    <a href="{% url 'game:game_retrieve' play.id %}">게임정보</a>
+                </div>
+            </div>
+        </article>
+        <hr />
+    {% endfor %}
+{% endblock content %}
