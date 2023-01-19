@@ -1,0 +1,9 @@
+{% extends 'game/main.html' %}
+
+{% block content %}
+<form method="POST" action="">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="SignUp">
+</form>
+{% endblock content %}
