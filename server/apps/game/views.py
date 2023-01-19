@@ -152,6 +152,7 @@ def defend(request, pk, *args, **kwargs):
     
     if request.method == "POST":
         play.defend_card=request.POST["defend_card"]
+        print(type(play.defend_card))
         play_result(play)
         return redirect("game/game_retrieve.html")
 
@@ -167,21 +168,21 @@ def play_result(play):
     # 작을때 이김
     if play.rule == 0:
         if play.defend_card > play.attack_card:
-            play.winner=play.attack_id
+            play.winner=play.attack_id.id
             play.attack_id.score+=play.attack_card
             play.defend_id.score-=play.defend_card
         else:
-            play.winner=play.defend_card_id
+            play.winner=play.defend_id.id
             play.attack_id.score-=play.attack_card
             play.defend_id.scord+=play.defend_card
     # 클 때 이김
     else:
         if play.defend_card < play.attack_card:
-            play.winner=play.attack_id
+            play.winner=play.attack_id.id
             play.attack_id.score+=play.attack_card
             play.defend_id.score-=play.defend_card
         else:
-            play.winner=play.defend_card_id
+            play.winner=play.defend_id.id
             play.attack_id.score-=play.attack_card
             play.defend_id.scord+=play.defend_card
     play.save()

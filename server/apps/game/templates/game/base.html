@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,10 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PIROGRAM CARDGAME</title>
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
     <header>
         <div class="nav">
+            <div>PIROGRAM CARDGAME</div>
+            <ul>
             {% if user.is_authenticated %}
                 <li><a href="{% url 'game:create' %}">게임하기</a></li>
                 <li><a href="{% url 'game:ranking_list' %}">랭킹보기</a></li>
@@ -17,9 +22,10 @@
                 <li><a href="{% url 'game:login' %}">로그인</a></li>
                 <li><a href="{% url 'game:signup' %}">Signup</a></li>
             {% endif %}
+            </ul>
         </div>
     </header>
-    <div>
+    <div class="container">
         {% block content %}
         {% endblock %}
     </div>
