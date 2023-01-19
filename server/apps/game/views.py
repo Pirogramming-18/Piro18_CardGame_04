@@ -4,7 +4,6 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import auth
 from .models import User, Play
 from django.db.models import Q
-import random
 
 # seoyeong
 from .models import *
@@ -109,7 +108,7 @@ def game_create(request, *args, **kwargs):
     card_list = []
     num = 5
     while num > 0:
-        number = random.randint(1, 10)
+        number = randint(1, 10)
         if number not in card_list:
             card_list.append(number)
             num-=1
