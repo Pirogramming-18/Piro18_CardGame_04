@@ -10,7 +10,7 @@
     <header>
         <div class="nav">
             {% if user.is_authenticated %}
-                <li><a href="">게임하기</a></li>
+                <li><a href="{% url 'game:create' %}">게임하기</a></li>
                 <li><a href="{% url 'game:ranking_list' %}">랭킹보기</a></li>
                 <li><a href="{% url 'game:logout' %}">로그아웃</a></li>
             {% else %}

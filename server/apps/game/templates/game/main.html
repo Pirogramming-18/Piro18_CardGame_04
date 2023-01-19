@@ -4,7 +4,7 @@
     <div>전 세계 프로그래머와 한 판 승부 숫자카드</div>
     {% if user.is_authenticated %}
         <div>{{ user.username }}님이 로그인 중</div>
-        <div><a href="">게임하기</a></div>
+        <div><a href="{% url 'game:create' %}">게임하기</a></div>
         <div><a href="{% url 'game:game_list' %}">전적보기</a></div>
     {% else %}
         <div><a href="{% url 'game:create' %}">게임하기</a></div>
