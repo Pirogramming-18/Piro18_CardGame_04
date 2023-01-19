@@ -11,6 +11,7 @@ class User(AbstractUser):
     gender = None
     job = None
     desc = None
+    email = models.EmailField(null=True)
     # 점수
     score = models.IntegerField(default=0)
 
