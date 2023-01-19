@@ -3,7 +3,7 @@
 {% block content %}
     <h2>{{ play.id }} - {{ play.attack_id }} VS {{ play.defend_id }}</h2>
     {% if user.username == defend_name and not play.accept %}
-        <div><a href="">대응하기</a></div>
+        <div><a href="{% url 'game:defend' play.id %}">대응하기</a></div>
         <hr>
     {% elif user.username == attack_name and not play.accept %}
         <div>진행중...</div>

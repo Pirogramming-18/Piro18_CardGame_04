@@ -10,10 +10,10 @@
                     <span>{{ play.id }}</span> - {{ play.attack_id }} <span>VS</span> {{ play.defend_id }}
                 </div>
                 {% if user.username == defend_name and not play.accept %}
-                    <div><a href="">반격하기</a></div>
+                    <div><a href="{% url 'game:defend' play.id %}">반격하기</a></div>
                 {% elif user.username == attack_name and not play.accept %}
                     <div>진행중...</div>
-                    <form action="" method="post">
+                    <form action="{% url 'game:delete' play.id %}" method="post">
                         {% csrf_token %}
                         <input type="submit" , value="게임 취소" />
                     </form>

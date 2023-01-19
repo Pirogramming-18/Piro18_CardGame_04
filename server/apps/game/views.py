@@ -4,11 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import auth
 from .models import User, Play
 from django.db.models import Q
-
-# seoyeong
-from .models import *
 from random import *
-#
 
 def main_page(request, *args, **kwargs):
     return render(request, "game/main.html")
@@ -103,7 +99,6 @@ def ranking_list(request):
 def game_create(request, *args, **kwargs):
     # num = random.randint(0, 1)
     # win_list = ["숫자가 더 작은 사람이 대결에서 이깁니다", "숫자가 더 큰 사람이 대결에서 이깁니다"]
-    user_id = request.user
     users = User.objects.all()
     card_list = []
     num = 5
@@ -115,11 +110,11 @@ def game_create(request, *args, **kwargs):
         else:
             continue
     card_list.sort()
-    num = request.GET.get('search_mode')
     if request.method == "POST":
+        num = request.POST['search_mode']
         Play.objects.create(
-            attack_id=user_id,
-            defend_id=request.POST["user"],
+            attack_id=request.user,
+            defend_id=User.objects.get(id=request.POST["user"]),
             attack_card = num,
             defend_card = 0,
             winner = 0,
@@ -136,7 +131,8 @@ def game_delete(request, pk, *args, **kwargs):
     if request.method == "POST":
         play = Play.objects.get(id=pk)
         play.delete()
-    return redirect("/")
+    return redirect("game:game_list")
+
 # game update (반격하기)
 def defend(request, pk, *args, **kwargs):
     play=Play.objects.get(id=pk)
@@ -145,15 +141,17 @@ def defend(request, pk, *args, **kwargs):
     card_nums=[]
     for i in range(5):
         defend_card_num=randint(1,10)
-        while defend_card_num in card_nums:
+        while defend_card_num in card_nums or defend_card_num == play.attack_card:
             defend_card_num = randint(1,10)
         card_nums.append(defend_card_num)
         card_nums.sort()
     
     if request.method == "POST":
-        play.defend_card=request.POST["defend_card"]
+        play.defend_card=int(request.POST["defend_card"])
+        play.accept = True
+        play.save()
         play_result(play)
-        return redirect("game/game_retrieve.html")
+        return redirect(f"/{play.id}")
 
     context= {
         "play":play ,
@@ -167,23 +165,24 @@ def play_result(play):
     # 작을때 이김
     if play.rule == 0:
         if play.defend_card > play.attack_card:
-            play.winner=play.attack_id
+            play.winner = play.attack_id.id
             play.attack_id.score+=play.attack_card
             play.defend_id.score-=play.defend_card
         else:
-            play.winner=play.defend_card_id
+            play.winner=play.defend_id.id
             play.attack_id.score-=play.attack_card
-            play.defend_id.scord+=play.defend_card
+            play.defend_id.score+=play.defend_card
     # 클 때 이김
     else:
+        print(type(play.attack_id), play.attack_id)
         if play.defend_card < play.attack_card:
-            play.winner=play.attack_id
+            play.winner=play.attack_id.id
             play.attack_id.score+=play.attack_card
             play.defend_id.score-=play.defend_card
         else:
-            play.winner=play.defend_card_id
+            play.winner=play.defend_id.id
             play.attack_id.score-=play.attack_card
-            play.defend_id.scord+=play.defend_card
+            play.defend_id.score+=play.defend_card
     play.save()
     play.attack_id.save()
     play.defend_id.save()

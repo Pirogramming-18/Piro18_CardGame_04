@@ -5,22 +5,20 @@
         {% csrf_token %}
         <div>내가 고른 카드: </div>
         <!-- 10숫자 중에 5개 숫자가 랜덤으로 for문으로 지정되며, 그중하나 선택-->
-        <form action="{% url 'game:create' %}" method="get" id="search_mode">
-            <div class="container my-3">
-                <select name="search_mode" id="search_mode">
-                    <option value="">카드 선택</option>
-                    {% for card in card_list %}
-                        <option value="{{card}}">{{card}}</option>
-                    {% endfor %}
-                </select>
-            </div>
-        </form>
+        <div class="container my-3">
+            <select name="search_mode" id="search_mode">
+                <option value="">카드 선택</option>
+                {% for card in card_list %}
+                    <option value="{{card}}">{{card}}</option>
+                {% endfor %}
+            </select>
+        </div>
         <br />
         <div>공격할 상대는? </div>
         <select name="user">
             <option value="">----</option>
             {% for user in users %}
-                <option value="{{user.id}}">{{user.username}}</option>
+                <option value="{{ user.id }}">{{user.username}}</option>
             {% endfor %}
         </select>
         <!-- User중 공격할 상대 선택-->
