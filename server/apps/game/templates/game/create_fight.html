@@ -1,0 +1,24 @@
+{% extends 'game/base.html' %} {% block content %}
+<form action="" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div>내가 고른 카드:</div>
+  <!-- 10숫자 중에 5개 숫자가 랜덤으로 for문으로 지정되며, 그중하나 선택-->
+  <select name="">
+    {% for ??? in ??? %}
+    <option value=""></option>
+    {% endfor %}
+  </select>
+  <br />
+  <div>공격할 상대는?</div>
+  <!-- User중 공격할 상대 선택-->
+  <select name="">
+    {% for ??? in ??? %}
+    <option value=""></option>
+    {% endfor %}
+  </select>
+  <br />
+  <div>
+    <input type="submit" , value="공격하기!" />
+  </div>
+</form>
+{% endblock content %}

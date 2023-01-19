@@ -1,0 +1,17 @@
+{% extends 'game/base.html' %} {% block content %}
+<form action="" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div>{{}}에게 반격하세요!</div>
+  <div>내가 고른 카드:</div>
+  <!-- 10숫자 중 지정된 5개 숫자 제외하고, 나머지 숫자 중 하나 선택-->
+  <select name="">
+    {% for ??? in ??? %}
+    <option value=""></option>
+    {% endfor %}
+  </select>
+  <br />
+  <div>
+    <input type="submit" , value="반격하기!" />
+  </div>
+</form>
+{% endblock content %}
