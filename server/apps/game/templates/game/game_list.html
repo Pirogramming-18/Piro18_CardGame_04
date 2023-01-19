@@ -1,0 +1,29 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+    <div>현재 플레이어: {{}}</div>
+    <br>
+    {% for ??? in ??? %}
+        <article>
+            <div>
+                <div>{{}} <span>VS</span> {{}}</div>
+                {% if 로그인한 유저.공격신청받은여부 %}
+                    <div><a href="">반격하기</a></div>
+                {% elif 로그인한 유저가 공격한 유저.공격신청받은여부==FALSE %}
+                    <div>진행중...</div>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <input type="submit" , value="게임 취소" />
+                    </form>
+                {% else %}
+                    <!-- 승패 -->
+                    <div>결과: {{}}</div>
+                {% endif %}
+                <div>
+                    <a href="">게임정보</a>
+                </div>
+            </div>
+        </article>
+        <hr />
+    {% endfor %}
+{% endblock content %}

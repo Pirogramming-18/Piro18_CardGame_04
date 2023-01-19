@@ -5,12 +5,12 @@ class User(AbstractUser):
     first_name = None
     last_name = None
     name = None
-    email = None
     nickname = None
     birth = None
     gender = None
     job = None
     desc = None
+    email=models.EmailField(null=True)
     # 점수
     score = models.IntegerField(default=0)
 

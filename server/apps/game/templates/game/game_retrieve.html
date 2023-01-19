@@ -1,0 +1,35 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+    <h2>{{post.title}}</h2>
+    {% if 로그인한 유저.공격신청받은여부 %}
+        <div><a href="">대응하기</a></div>
+        <hr>
+    {% elif 로그인한 유저가 공격한 유저.공격신청받은여부==FALSE %}
+        <div>진행중...</div>
+        <!-- 내 카드 숫자 -->
+        <div>나: {{}}</div>
+        <form action="" method="post">
+            {% csrf_token %}
+            <input type="submit" , value="게임 취소" />
+        </form>
+    {% else %}
+        <hr>
+        <div>숫자가 더 {{}} 사람이 대결에서 이깁니다</div>
+        <hr>
+        <!-- 유저 이름, 유저 카드 숫자 -->
+        <div>{{}}: {{}}</div>
+        <!-- 내 카드 숫자 -->
+        <div>나: {{}}</div>
+        <hr>
+        <!-- 승 / 패 -->
+        <div>결과: {{}}</div>
+        <hr>
+        <!-- 내 정수 -->
+        <div><span>점수</span>: {{}}점</div>
+    {% endif %}
+    <!-- list 전적 페이지로 돌아가기 -->
+    <div>
+      <a href="">전적 목록</a>
+    </div>
+{% endblock content %}
