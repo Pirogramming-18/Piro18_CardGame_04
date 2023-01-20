@@ -7,6 +7,6 @@
         <div class="start_game"><a href="{% url 'game:create' %}">게임하기</a></div>
         <div class="start_game"><a href="{% url 'game:game_list' %}">전적보기</a></div>
     {% else %}
-        <div class="start_game"><a href="{% url 'game:create' %}">게임하기</a></div>
+        <div class="start_game"><a href="{% url 'game:login' %}">게임하기</a></div>
     {% endif %}
 {% endblock content %}

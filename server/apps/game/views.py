@@ -14,7 +14,7 @@ def signup(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             user = form.save()
-            auth.login(request, user)      
+            auth.login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return render(request, template_name="game/success.html")
         else:
             return redirect('game:signup')
@@ -31,7 +31,7 @@ def login(request):
         form = AuthenticationForm(request, request.POST)
         if form.is_valid():
             user = form.get_user()
-            auth.login(request, user)
+            auth.login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('game:main')
         else:
             context = {
