@@ -1,0 +1,22 @@
+{% extends 'game/base.html' %}
+
+{% block content %}
+    <form action="{% url 'game:defend' play.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3>반격하세요 테스트</h3>
+        <div class="create_container">
+            <div class="create_text">내가 고른 카드: </div>
+            <select name="defend_card">
+                {% for num in card_nums %}
+                    <option value="{{ num }}">
+                        {{num}}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <br />
+        <div>
+            <input type="submit" , value="반격하기!" />
+        </div>
+    </form>
+{% endblock content %}

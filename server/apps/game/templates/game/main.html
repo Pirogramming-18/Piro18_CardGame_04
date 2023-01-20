@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Card Game</title>
-    </head>
-    <body>
-        {% if user.is_authenticated %}
-            <li><a href="{% url 'game:logout' %}">Logout</a></li>
-        {% else %}
-            <li><a href="{% url 'game:login' %}">Login</a></li>
-            <li><a href="{% url 'game:signup' %}">Signup</a></li>
-        {% endif %}
+{% extends 'game/base.html' %}
 
-        {% block content %}
-        {% endblock content %}
-    </body>
-</html>
+{% block content %}
+    <h2>전 세계 피로그래머와<br>한 판 승부 숫자카드게임</h2>
+    {% if user.is_authenticated %}
+        <div class="loginggg">{{ user.username }}님이 로그인 중</div>
+        <div class="start_game"><a href="{% url 'game:create' %}">게임하기</a></div>
+        <div class="start_game"><a href="{% url 'game:game_list' %}">전적보기</a></div>
+    {% else %}
+        <div class="start_game"><a href="{% url 'game:login' %}">게임하기</a></div>
+    {% endif %}
+{% endblock content %}

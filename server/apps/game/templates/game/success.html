@@ -1,2 +1,6 @@
+{% extends 'game/base.html' %} {% block content %} 
 회원가입 성공!
-<a href="{% url 'game:main' %}">홈으로</a>
+<div class="go_home">
+    <a href="{% url 'game:main' %}">홈으로</a>
+</div>
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% extends 'game/base.html' %}
+
+{% block content %}
+    <div class="retrieve_container ranking_con">
+        <h3>Piro 명예의 전당</h3>
+        {% for user in users %}
+        <!-- 유저 등수 유저 이름 유저 점수 -->
+        <div class="ranking_align">{{ forloop.counter }}등 {{ user.username }}님 ! 총점수 : {{ user.score }} 점</div>
+        {% endfor %}
+        <!-- list 전적 페이지로 돌아가기 -->
+        <div class="menu_container ranking_menu">
+            <a href="{% url 'game:game_list' %}">전적 목록</a>
+        </div>
+    </div>
+{% endblock content %}

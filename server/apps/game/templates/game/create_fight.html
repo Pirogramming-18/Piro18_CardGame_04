@@ -1,0 +1,32 @@
+{% extends 'game/base.html' %}
+
+{% block content %}
+    <form action="{% url 'game:create' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="create_container">
+            <div class="create_text">내가 고른 카드: </div>
+            <div class="containermy-3">
+                <select name="search_mode" id="search_mode">
+                    <option value="">카드 선택</option>
+                    {% for card in card_list %}
+                        <option value="{{card}}">{{card}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <br />
+        <div class="create_container">
+            <div class="create_text">공격할 상대는? </div>
+            <select name="user">
+                <option value="">----</option>
+                {% for user in users %}
+                    <option value="{{ user.id }}">{{user.username}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <br />
+        <div class="button_submit">
+            <input type="submit" , value="공격하기!" />
+        </div>
+    </form>
+{% endblock content %}
