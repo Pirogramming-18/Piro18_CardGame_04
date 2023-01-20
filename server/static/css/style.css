@@ -22,7 +22,8 @@ hr {
 a {
   text-decoration: none;
 }
-.nav > div:nth-child(1) {
+
+.nav .logo {
   color: #93c053;
   font-size: 20px;
 }
@@ -144,6 +145,10 @@ h3 {
 .ranking_con {
   height: auto;
   padding-top: 60px;
+}
+
+.ranking_con > .ranking_align:first-of-type{
+  color: rgb(227, 229, 99);
 }
 
 .ranking_align {
