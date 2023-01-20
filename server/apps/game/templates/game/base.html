@@ -1,36 +1,35 @@
-{% load static %}
+{% load static %} {% load socialaccount%} {% providers_media_js %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PIROGRAM CARDGAME</title>
-    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
     <header>
-        <div class="nav">
-            <div><a href="{% url 'game:main' %}" class="logo">PIROGRAM CARDGAME</a></div>
-            <ul>
-            {% if user.is_authenticated %}
-                <li><a href="{% url 'game:create' %}">게임하기</a></li>
-                <li><a href="{% url 'game:ranking_list' %}">랭킹보기</a></li>
-                <li><a href="{% url 'game:logout' %}">로그아웃</a></li>
-                <li><a href="/accounts/logout">Social logout</a><br /></li>
-            {% else %}
-                <li><a href="{% url 'game:login' %}">로그인</a></li>
-                <li><a href="{% url 'game:signup' %}">회원가입</a></li>
-                <li><a href="{% provider_login_url 'google' %}">구글 로그인</a></li>
-                <li><a href="{% provider_login_url 'naver' %}">네이버 로그인</a></li>
-            {% endif %}
-            </ul>
+      <div class="nav">
+        <div>
+          <a href="{% url 'game:main' %}" class="logo">PIROGRAM CARDGAME</a>
         </div>
+        <ul>
+          {% if user.is_authenticated %}
+          <li><a href="{% url 'game:create' %}">게임하기</a></li>
+          <li><a href="{% url 'game:ranking_list' %}">랭킹보기</a></li>
+          <li><a href="{% url 'game:logout' %}">로그아웃</a></li>
+          <li><a href="/accounts/logout">Social logout</a><br /></li>
+          {% else %}
+          <li><a href="{% url 'game:login' %}">로그인</a></li>
+          <li><a href="{% url 'game:signup' %}">회원가입</a></li>
+          <li><a href="{% provider_login_url 'google' %}">구글 로그인</a></li>
+          <li><a href="{% provider_login_url 'naver' %}">네이버 로그인</a></li>
+          {% endif %}
+        </ul>
+      </div>
     </header>
-    <div class="container">
-        {% block content %}
-        {% endblock %}
-    </div>
-</body>
+    <div class="container">{% block content %} {% endblock %}</div>
+  </body>
 </html>
