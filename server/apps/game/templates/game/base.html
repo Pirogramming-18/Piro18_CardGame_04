@@ -18,9 +18,12 @@
                 <li><a href="{% url 'game:create' %}">게임하기</a></li>
                 <li><a href="{% url 'game:ranking_list' %}">랭킹보기</a></li>
                 <li><a href="{% url 'game:logout' %}">로그아웃</a></li>
+                <li><a href="/accounts/logout">Social logout</a><br /></li>
             {% else %}
                 <li><a href="{% url 'game:login' %}">로그인</a></li>
                 <li><a href="{% url 'game:signup' %}">회원가입</a></li>
+                <li><a href="{% provider_login_url 'google' %}">구글 로그인</a></li>
+                <li><a href="{% provider_login_url 'naver' %}">네이버 로그인</a></li>
             {% endif %}
             </ul>
         </div>

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+
 class User(AbstractUser):
     first_name = None
     last_name = None
@@ -18,9 +19,11 @@ class User(AbstractUser):
 class Play(models.Model):
     how_to_win = ["숫자가 더 작은 사람이 대결에서 이깁니다", "숫자가 더 큰 사람이 대결에서 이깁니다"]
     # 공격한 사람 -> 처음에 정해짐
-    attack_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name="attack")
+    attack_id = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="attack")
     # 공격당한 사람 -> 처음에 정해짐
-    defend_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name="defend")
+    defend_id = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="defend")
     # 공격한 사람 카드 -> 처음에 정해짐
     attack_card = models.IntegerField()
     # 공격당한 사람 카드 -> 반격하기 할 때 업데이트
