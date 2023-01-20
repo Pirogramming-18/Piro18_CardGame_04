@@ -1,38 +1,69 @@
-{% extends 'game/base.html' %}
-
-{% block content %}
-    <div>현재 플레이어: {{ user.username }}</div>
-    <br>
-    {% for play, attack_name, defend_name in play_list_name %}
-        <article>
-            <div>
-                <div>
-                    <span>{{ play.id }}</span> - {{ play.attack_id }} <span>VS</span> {{ play.defend_id }}
-                </div>
-                {% if user.username == defend_name and not play.accept %}
-                    <div><a href="{% url 'game:defend' play.id %}">반격하기</a></div>
-                {% elif user.username == attack_name and not play.accept %}
-                    <div>진행중...</div>
-                    <form action="{% url 'game:delete' play.id %}" method="post">
-                        {% csrf_token %}
-                        <input type="submit" , value="게임 취소" />
-                    </form>
-                {% else %}
-                    <!-- 승패 -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIROGRAM CARDGAME</title>
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="nav">
+            <div>PIROGRAM CARDGAME</div>
+            <ul>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'game:create' %}">게임하기</a></li>
+                <li><a href="{% url 'game:ranking_list' %}">랭킹보기</a></li>
+                <li><a href="{% url 'game:logout' %}">로그아웃</a></li>
+            {% else %}
+                <li><a href="{% url 'game:login' %}">로그인</a></li>
+                <li><a href="{% url 'game:signup' %}">회원가입</a></li>
+            {% endif %}
+            </ul>
+        </div>
+    </header>
+    <div class="new_list_container">
+        <div class="list_container">
+            <div><span>|</span> 현재 플레이어: {{ user.username }}</div>
+            <hr />
+            <div class="flex_box">
+            {% for play, attack_name, defend_name in play_list_name %}
+                <article>
                     <div>
-                        결과: 
-                        {% if play.winner == user.id %}
-                            승리
+                        <div>
+                            <span>{{ play.id }}</span> - {{ play.attack_id }} <span>VS</span> {{ play.defend_id }}
+                        </div>
+                        <div>
+                        {% if user.username == defend_name and not play.accept %}
+                            <div><a href="{% url 'game:defend' play.id %}">반격하기</a></div>
+                        {% elif user.username == attack_name and not play.accept %}
+                            <div id="special_text">진행중...</div>
+                            <form action="{% url 'game:delete' play.id %}" method="post">
+                                {% csrf_token %}
+                                <input type="submit" , value="게임 취소" />
+                            </form>
                         {% else %}
-                            패배
+                            <div>
+                                결과: 
+                                {% if play.winner == user.id %}
+                                    승리
+                                {% else %}
+                                    패배
+                                {% endif %}
+                            </div>
                         {% endif %}
+                        </div>
+                        <div>
+                            <a href="{% url 'game:game_retrieve' play.id %}">게임정보</a>
+                        </div>
                     </div>
-                {% endif %}
-                <div>
-                    <a href="{% url 'game:game_retrieve' play.id %}">게임정보</a>
-                </div>
+                </article> 
+            {% endfor %}
             </div>
-        </article>
-        <hr />
-    {% endfor %}
-{% endblock content %}
+        </div>
+    </div>
+</body>
+</html>
